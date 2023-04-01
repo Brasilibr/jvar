@@ -1,6 +1,15 @@
 # jvar
 JVAR is a dynamic multi type variable similar to Javascript variables, it brings flexibility into a typed language.
 
+#Building this project
+In a linux machine (or windows wsl) with build essentials installed, it is as simple as writing: make  ,in the command line.
+sudo apt-get install build-essential
+make
+There is run.sh as a utility that will kill a last project instance running, compile and spin up a new instance.
+
+#Using the lib
+JVAR is contained in jvar.cpp and jvar.h, jvar.h is commented with explanations of every functionality. Right now it only depends on picojson.h(for parsing json).
+To use in your project just copy jvar.cpp, jvar.h, picojson.h and include jvar.h to one of your includes.
 
 JVAR
 
