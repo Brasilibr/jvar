@@ -1,5 +1,5 @@
 # jvar
-JVAR is a dynamic multi type variable similar to Javascript variables, it brings flexibility into a typed language.
+JVAR is a dynamic self managed multi type variable similar to Javascript variables, it brings flexibility into c++ typed language.
 
 # Building this project
 In a linux machine (or windows wsl) with build essentials installed, it is as simple as writing: make  ,in the command line.
