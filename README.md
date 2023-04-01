@@ -11,7 +11,7 @@ There is run.sh as a utility that will kill a last project instance running, com
 JVAR is contained in jvar.cpp and jvar.h, jvar.h is commented with explanations of every functionality. Right now it only depends on picojson.h(for parsing json).
 To use in your project just copy jvar.cpp, jvar.h, picojson.h and include jvar.h to one of your includes.
 
-JVAR
+# JVAR
 
 Jvar é uma das crianças dos olhos da Brasili, é uma classe em C++ com o proposito de facilitar a entrada e saída de dados nos microserviços em c++.
 
@@ -58,7 +58,7 @@ double g = jva;
 std::string h = jva;
 
 
-Objetos
+# Objetos
 
 "jo" é jvar object resumidamente, e representa uma inicialização com um std::unordered_map<std::string,jvar>
 
@@ -83,7 +83,7 @@ j["e"] = MNULL;
 j["myarray"] = ja({1,2,"a",2.5,MNULL});
 
 
-Arrays
+# Arrays
 
 "ja" é jvar array resumidamente e representa uma inicialização com std::vector<jvar>
 
@@ -101,7 +101,7 @@ k[5] = jo({ "a" <<jv "object because we can" , "yup" << jv true});
 
 Infelizmente em C++ o valor 0 pode representar um caractere vazio, e portanto é ambiguo no operador [] da jvar que aceita caracteres e numeros, por isso definimos "ZERO" como (size_t)0 e usamos ao invés.
 
-foreach 
+# foreach 
 
 Funciona com todos os tipos de jvar. Não é necessário tratar se houver um ou mais itens diferentemente, tudo pode ser tratado no plural
 
@@ -112,7 +112,7 @@ for(jvar& item : meuJvar) // ou j, ou i, ou f ou jva, etc
 }
 
 
-Utilidades
+# Utilidades
 
 jvar parseJson(std::string json);
 
@@ -137,14 +137,14 @@ bool isArray();
 bool isObject();
 
 
-Indicadores de tamanho
+# Indicadores de tamanho
 
 size_t size(); //mostra a quantidade de elementos (string, object, array ou 0)
 size_t memoryFootPrint(); //mostra quanta memoria o objeto está usando
 bool isEmpty(); //true se size for 0
 
 
-Utilidades de objeto ou array
+# Utilidades de objeto ou array
 
 No caso de uso com outros tipos retornará ainda valores na mesma forma, sempre com 1 elemento
 
@@ -155,14 +155,14 @@ jvar keys(); //retorna j array com forma [ "chave1","chave2",... ]
 jvar values(); //retorna j array com forma [ "valor1",2,... ]
 
 
-Utilidades de Array ou String
+# Utilidades de Array ou String
 
 size_t indexOf(std::string str, size_t start=0);
 //Retorna posição de elemento de texto em um array ou posição do elemento dentro de uma string
 //std::string::npos caso contrário
 
 
-Utilidades de String
+# Utilidades de String
 
 jvar replaceAll( const std::string &search, const std::string &replace );
 //troca todas ocorrencias de "search" com "replace"
