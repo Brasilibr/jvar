@@ -13,58 +13,55 @@ To use in your project just copy jvar.cpp, jvar.h, picojson.h and include jvar.h
 
 # JVAR
 
-Jvar é uma das crianças dos olhos da Brasili, é uma classe em C++ com o proposito de facilitar a entrada e saída de dados nos microserviços em c++.
+Jvar is one of Brasili's most cherished projects, and it is a C++ class designed to facilitate input and output of data in C++ microservices.
 
-Jvar é uma variavel capaz de representar qualquer um dos seguintes tipos:
+Jvar is a variable capable of representing any of the following types: string, numeric, boolean, array, object, and mnull.
 
-string, numérico, booleano, array, objeto e mnull.
+mnull is an empty class designed to indicate that the variable does not contain any value.
 
-mnull é uma classe vazia com o propósito de indicar que aquela variável não contém valor algum.
+Basically, Jvar adds a variable type to the strongly-typed language, which is standard in dynamic languages like Python, JavaScript, and PHP.
 
-Basicamente se adiciona a linguagem fortemente tipada um tipo variável como  é o padrão em linguagens dinâmicas como Python, Javascript, PHP.
+Jvar naturally integrates with C++ types, and this is its greatest strength. Additionally, it provides JavaScript-based utility types such as substr, replace, indexOf, split, and join.
 
-Jvar se integra naturalmente com os tipos de c++ e esse é seu grande poder. Além disso apresenta utilidades de tipos baseados em javascript como substr, replace,indexOf,split,join.
+For example, if we have the following function:
 
-Por exemplo se tivermos a seguinte função:
-
-fazerAlgo(int a1, std::string b2, float c3);
+doSomething(int a1, std::string b2, float c3);
 
 
-Poderíamos passar jvar para os três parâmetros.
+We could pass Jvar for all three parameters.
 
 jvar a = 1, b = “potato”, c = 0.5;
 
 
-e chamar
+and call
 
-fazerAlgo(a, b, c);
+doSomething(a, b, c);
 
+This is especially useful when receiving data from other microservices and the database. With this flexible and easy-to-use type, it is not necessary to define data types in every microservice. It is only necessary to define where the data originated ( the golden source ).
 
-Isso é especialmente útil quando estamos recebendo dados de outros micro-serviços e do banco de dados, com esse tipo flexível e fácil de usar, não é necessário definir os tipos de dados em todos microserviços, apenas é necessário definir onde o dado é originado.
-
-Exemplos de uso:
+Use Cases:
 
 jvar jva = 1;
-std::string b = "batata";
+std::string b = "potato";
 
-jvar c = b + jva; //output "batata1"
+jvar c = b + jva; //output "potato1"
 
 int  d =55;
 double e = 23.5;
 
 jvar f = jva + d + e; //output 79.5
-int g = jva;
-double g = jva;
-std::string h = jva;
+int g = jva; //pass jvar to any typed var
+double g = jva;//pass jvar to any typed var
+std::string h = jva;//pass jvar to any typed var
 
 
-# Objetos
+# Objects
 
-"jo" é jvar object resumidamente, e representa uma inicialização com um std::unordered_map<std::string,jvar>
+"jo" is a shorthand for Jvar Object and represents an initialization with a std::unordered_map<std::string, jvar>.
 
-"jv" é um (jvar) resumidamente, um cast de tipo para facilitar o operador <<
+"jv" is a shorthand for jvar, and it is a type cast used to facilitate the << operator.
 
-o operador "string" << jvar é usado para gerar uma entrada chave:valor em um jo, note que jo é meramente um inicializador, o resultado final é uma jvar.
+The string << jvar operator is used to generate a key-value entry in a jo. Note that jo is merely an initializer, and the final result is a jvar.
 
 jvar i = jo({
 "a" << jv 1,
@@ -73,7 +70,7 @@ jvar i = jo({
 "d" << jv 0.5,
 "e" << jv MNULL
 });
-//também pode inicializar diretamente com valores:
+//you can also initialize values directly in the object:
 jvar j;
 j["a"] = 1;
 j["b"] = "potato";
@@ -85,11 +82,11 @@ j["myarray"] = ja({1,2,"a",2.5,MNULL});
 
 # Arrays
 
-"ja" é jvar array resumidamente e representa uma inicialização com std::vector<jvar>
+"ja" is a shorthand for Jvar Array and represents an initialization with std::vector<jvar>.
 
 jvar k = ja({1,false,true,MNULL,"potato",0.5});
 
-//também pode inicializar diretamente com valores:
+// You can also initialize it directly with values:
 
 k[ZERO] = 1;
 k[1] = 2.3;
@@ -99,25 +96,27 @@ k[4] = MNULL;
 k[5] = jo({ "a" <<jv "object because we can" , "yup" << jv true});
 
 
-Infelizmente em C++ o valor 0 pode representar um caractere vazio, e portanto é ambiguo no operador [] da jvar que aceita caracteres e numeros, por isso definimos "ZERO" como (size_t)0 e usamos ao invés.
+Unfortunately, in C++, the value 0 can represent an empty character, making it ambiguous in the operator [] of jvar which accepts characters and numbers. Therefore, we define "ZERO" as (size_t)0 and use it instead.
 
 # foreach 
 
-Funciona com todos os tipos de jvar. Não é necessário tratar se houver um ou mais itens diferentemente, tudo pode ser tratado no plural
+The "foreach" loop works with all types of jvar. There's no need to treat single or multiple items differently, everything can be treated in the plural form.
 
-for(jvar& item : meuJvar) // ou j, ou i, ou f ou jva, etc
+For example:
+`
+for (jvar& item : myvar) // or j, or i, or f or jva, etc
 {
- std::cout << item << std::endl;
- //do something, works for all jvar types
+  std::cout << item << std::endl;
+  // do something, works for all jvar types
 }
+`
+In this code snippet, the "foreach" loop can be used with all types of jvar, and there's no need to treat single or multiple items differently. The loop iterates over each item in myvar, and the std::cout statement can be used to perform some action on each item, regardless of its type.
 
-
-# Utilidades
+# Utilities
 
 jvar parseJson(std::string json);
 
-
-Conversores 'óbvios'
+Obvious converters:
 
 bool asBoolean();
 double asDouble();
@@ -127,7 +126,7 @@ std::string prettyString(); //pretty json for debugging
 std::string asString();
 
 
-Checadores de Tipo
+Type Checkers
 
 bool isNumeric();
 bool isInteger();
@@ -137,51 +136,51 @@ bool isArray();
 bool isObject();
 
 
-# Indicadores de tamanho
+# Size Indicators
 
-size_t size(); //mostra a quantidade de elementos (string, object, array ou 0)
-size_t memoryFootPrint(); //mostra quanta memoria o objeto está usando
-bool isEmpty(); //true se size for 0
-
-
-# Utilidades de objeto ou array
-
-No caso de uso com outros tipos retornará ainda valores na mesma forma, sempre com 1 elemento
-
-jvar entries(); //retorna j array com forma [ {"chave":valor}, ... ]
-// [{"0":valor}] para outros tipos
- e [{"0":valor,"1":valor,...}] para array
-jvar keys(); //retorna j array com forma [ "chave1","chave2",... ]
-jvar values(); //retorna j array com forma [ "valor1",2,... ]
+size_t size(); //show amount of elements (string, object, array or 0)
+size_t memoryFootPrint(); //show how much memory that object is using
+bool isEmpty(); //true if size is 0
 
 
-# Utilidades de Array ou String
+# Object and Array utilities
+
+In case of use with other types, it will still return values in the same form, always with 1 element.
+
+jvar entries(); //returns j array in the form [ {"key":value}, ... ]
+// [{"0":value}] for other types
+// and [{"0":value,"1":value,...}] for array
+jvar keys(); //returns j array in the form [ "key1","key2",... ]
+jvar values(); //returns j array in the form [ "value1",2,... ]
+
+
+# Array or String Utilities
 
 size_t indexOf(std::string str, size_t start=0);
-//Retorna posição de elemento de texto em um array ou posição do elemento dentro de uma string
-//std::string::npos caso contrário
+// Returns the position of a text element in an array or the position of an element within a string
+// std::string::npos otherwise
 
 
-# Utilidades de String
+# String Utilities
 
-jvar replaceAll( const std::string &search, const std::string &replace );
-//troca todas ocorrencias de "search" com "replace"
+jvar replaceAll(const std::string& search, const std::string& replace);
+// Replaces all occurrences of "search" with "replace"
 
-jvar replace( const std::string &search, const std::string &replace );
-//troca a primeira ocorrencia de "search" com "replace"
+jvar replace(const std::string& search, const std::string& replace);
+// Replaces the first occurrence of "search" with "replace"
 
 jvar substr(size_t start, size_t end);
-//retorna um pedaço da string delimitado por start e end
+// Returns a substring delimited by start and end
 
 jvar substr(size_t start);
-//retorna um pedaço da string delimitado por start e o fim da string
+// Returns a substring delimited by start and the end of the string
 
-//Atualmente só funciona com caracteres ASCII, há planos para abranger todo UTF-8
+// Currently only works with ASCII characters, there are plans to cover all UTF-8
 jvar toLowerCase();
 jvar toUpperCase();
 jvar toCapitalized();
 
 
-jvar split(std::string separator); // transforma string em um array delimitado por separator
+jvar split(std::string separator); // turns string into an array delimited by separator
 
-jvar join(std::string separator); //transforma um array em uma string unida por separator
+jvar join(std::string separator); // turns an array into a string joined by separator
