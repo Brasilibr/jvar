@@ -29,17 +29,12 @@ Jvar naturally integrates with C++ types, and this is its greatest strength. Add
 
 For example, if we have the following function:
 
-doSomething(int a1, std::string b2, float c3);
+    void doSomething(int a1, std::string b2, float c3);
+    //We could pass Jvar for all three parameters.
+    jvar a = 1, b = “potato”, c = 0.5;
+    //and call
+    doSomething(a, b, c);
 
-
-We could pass Jvar for all three parameters.
-
-jvar a = 1, b = “potato”, c = 0.5;
-
-
-and call
-
-doSomething(a, b, c);
 
 This is especially useful when receiving data from other microservices and the database. With this flexible and easy-to-use type, it is not necessary to define data types in every microservice. It is only necessary to define where the data originated ( the golden source ).
 
@@ -88,7 +83,7 @@ You can also initialize values directly in the object:
 
 # Arrays
 
-"ja" is a shorthand for Jvar Array and represents an initialization with std::vector<jvar>.
+"ja" is a shorthand for Jvar Array and represents an initialization with `std::vector<jvar>`.
     
     jvar k = ja({1,false,true,MNULL,"potato",0.5});
 
@@ -102,7 +97,7 @@ You can also initialize values directly in the object:
     k[5] = jo({ "a" <<jv "object because we can" , "yup" << jv true});
 
 
-Unfortunately, in C++, the value 0 can represent an empty character, making it ambiguous in the operator [] of jvar which accepts characters and numbers. Therefore, we define "ZERO" as (size_t)0 and use it instead.
+Unfortunately, in C++, the value 0 can represent an empty character, making it ambiguous in the operator `[]` of jvar which accepts characters and numbers. Therefore, we define "ZERO" as (size_t)0 and use it instead.
 
 # foreach 
 
