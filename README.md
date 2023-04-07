@@ -25,7 +25,9 @@ mnull is an empty class designed to indicate that the variable does not contain 
 
 Basically, Jvar adds a dynamic variable type to the strongly-typed language, such as the standard in dynamic languages like Python, JavaScript, and PHP.
 
-Jvar naturally integrates with C++ types, and this is its greatest strength. Additionally, it provides JavaScript-based utility types such as substr, replace, indexOf, split, and join.
+Jvar naturally integrates with C++ types, and this is its greatest strength. 
+Additionally, it provides JavaScript-based utility functions such as substr, replace, indexOf, split, join, filter, sort, entries, values, keys, etc. 
+So if you are dealing with frontend and backend in many cases you don't have to change the way you think when you switch between your front/back projects.
 
 For example, if we have the following function:
 
@@ -87,8 +89,9 @@ You can also initialize values directly in the object:
     
     jvar k = ja({1,false,true,MNULL,"potato",0.5});
 
-// You can also initialize it directly with values:
+You can also initialize it directly with values:
 
+    jvar k;
     k[ZERO] = 1;
     k[1] = 2.3;
     k[2] = "potato";
