@@ -4,8 +4,8 @@ JVAR is a dynamic self managed multi type variable similar to Javascript variabl
 # Building this project
 In a linux machine (or windows wsl) with build essentials installed, it is as simple as writing: make  ,in the command line.
 `
-sudo apt-get install build-essential ;
-make
+    sudo apt-get install build-essential ;
+    make
 `
 There is run.sh as a utility that will kill a last project instance running, compile and spin up a new instance.
 
